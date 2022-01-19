@@ -1,46 +1,54 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-"""
-A simple tic-tac-toe game
-"""
 import pygame
 import sys
 
-from pygame import event
-from game   import Game
-
-# exit
-def bye():
-    pygame.quit()
-    sys.exit()
+from game_window import *
+from game_logic  import *
+from game_data   import *
 
 pygame.init()
 clock = pygame.time.Clock()
 
+# Create data container
+data = GameData()
+# create main window
+window = GameWindow(data)
 # create a game instance
-game = Game()
+game = GameLogic(data)
 
-while True:
+# Main loop
+main_loop = True
+while main_loop:
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            bye()
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_q:
-                bye()
-            if event.key == pygame.K_ESCAPE:
-                game.reset()
-            if event.key == pygame.K_UP:
-                game.sel_up()
-            if event.key == pygame.K_DOWN:
-                game.sel_down()
-            if event.key == pygame.K_LEFT:
-                game.sel_left()
-            if event.key == pygame.K_RIGHT:
-                game.sel_right()
-            if event.key == pygame.K_SPACE:
-                game.mark()
+    # new game
+    data.reset()
+    game.reset()
+    game_loop = True
+    print('Starting new game')
 
-    game.update()
-    clock.tick(60)
+    while game.is_running():
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game.finish()
+                main_loop = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    game.finish()
+                    main_loop = False
+                elif event.key == pygame.K_ESCAPE:
+                    game.finish()
+                else:
+                    game.user_input_key(event.key)
+
+        game.update()
+        window.update()
+        window.draw()
+
+# exit
+pygame.quit()
+sys.exit()
+
+
+
