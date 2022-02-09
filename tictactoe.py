@@ -25,7 +25,7 @@ class Game():
     # main game loop        
     def run(self):
         while True:
-            print('Starting new game')
+            print('\nStarting new game')
             winner = None
             while winner == None:
                 self.player[self.board.turn].move()
@@ -34,7 +34,7 @@ class Game():
             if winner == 0:
                 print('Draw')
             else:
-                print(f'{winner} wins')
+                print(f'{self.player[winner].id} wins')
             self.board.reset()
     
     # a test...

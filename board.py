@@ -102,7 +102,7 @@ class Board():
     # board printout
     def print(self):
         for i in range(3):
-            print(f'|{self.tiles[i][0]} {self.tiles[i][1]} {self.tiles[i][2]} |')
+            print(f'| {self.tiles[i][0]} {self.tiles[i][1]} {self.tiles[i][2]} |')
 
     # board lines score 
     def lines_score(self):

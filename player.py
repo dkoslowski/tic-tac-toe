@@ -7,13 +7,19 @@ class Player():
     # init
     def __init__(self, board) -> None:
         self.board = board
+        self.id = None
 
     # do your move
     def move(self):
         pass
-
+    
 # An AI player    
 class AIPlayer(Player):
+
+    # init
+    def __init__(self, board) -> None:
+        super().__init__(board)
+        self.id = 'AI'
 
     # do your move
     def move(self):
@@ -24,6 +30,11 @@ class AIPlayer(Player):
 
 # A human player
 class HumanPlayer(Player):
+
+    # init
+    def __init__(self, board) -> None:
+        super().__init__(board)
+        self.id = 'Human player'
 
     # do your move
     def move(self):
